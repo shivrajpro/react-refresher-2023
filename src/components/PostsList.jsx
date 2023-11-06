@@ -1,17 +1,23 @@
-import NewPost from "./NewPost";
-import Post from "./Post";
-import classes from "./PostsList.module.css"
+import { useState } from 'react';
 
-function PostsLIst(props) {
+import Post from './Post';
+import NewPost from './NewPost';
+import Modal from './Modal';
+import classes from './PostsList.module.css';
+
+function PostsList({ isPosting, onStopPosting }) {
   return (
     <>
-    <NewPost/>    
-    <ul className={classes.posts} >
-      <Post author="Shivraj" body="React.js is awsome" />
-      <Post author="Maxmilian" body="But I love Angular!" />
-    </ul>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost onCancel={onStopPosting} />
+        </Modal>
+      )}
+      <ul className={classes.posts}>
+        <Post author="Manuel" body="Check out the full course!" />
+      </ul>
     </>
   );
 }
 
-export default PostsLIst;
+export default PostsList;
